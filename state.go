@@ -109,7 +109,6 @@ func (s *State) scan() error {
 					Address: addrs[0].EncodeAddress(),
 				}
 
-				println("Address:", voutDB.Address)
 				vouts = append(vouts, voutDB)
 				s.DB.SetVout(tx, vout.N, voutDB)
 

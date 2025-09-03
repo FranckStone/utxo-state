@@ -1,0 +1,21 @@
+{
+  "from_block": 0,
+  "db_path": "data/your_network/db",
+  "server": ":8082",
+  "chain": {
+    "chain_name": "your_network_name",
+    "rpc": "127.0.0.1:YOUR_RPC_PORT",
+    "user_name": "your_username",
+    "pass_word": "your_password"
+  },
+  "chain_config": {
+    "pub_key_hash_addr_id": 0,
+    "script_hash_addr_id": 5,
+    "private_key_id": 128,
+    "witness_pub_key_hash_addr_id": 0,
+    "witness_script_hash_addr_id": 0,
+    "hd_public_key_id": [4, 136, 178, 30],
+    "hd_private_key_id": [4, 136, 173, 244],
+    "hd_coin_type": 0
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "from_block": 0,
+  "db_path": "data/db",
+  "server": ":8082",
+  "chain": {
+    "chain_name": "litecoin",
+    "rpc": "127.0.0.1:22666",
+    "user_name": "admin",
+    "pass_word": "admin"
+  },
+  "chain_config": {
+    "pub_key_hash_addr_id": 48,
+    "script_hash_addr_id": 50,
+    "private_key_id": 176,
+    "witness_pub_key_hash_addr_id": 0,
+    "witness_script_hash_addr_id": 0,
+    "hd_public_key_id": [4, 136, 178, 30],
+    "hd_private_key_id": [4, 136, 173, 244],
+    "hd_coin_type": 2
+  }
+}

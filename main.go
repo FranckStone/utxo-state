@@ -99,6 +99,7 @@ func main() {
 	router.POST("/getTxByAddress", newRouter.GetTxByAddress) // 根据地址获取交易历史记录，支持分页
 	router.POST("/getTx", newRouter.GetTx)                   // 根据交易哈希获取交易详细信息
 	router.POST("/broadcast", newRouter.Broadcast)           // 广播已签名的交易到区块链网络
+	router.GET("/currentBlock", newRouter.GetCurrentBlock)   // 获取当前遍历到的区块高度
 
 	// 启动 HTTP 服务器并监听端口
 	go func() {

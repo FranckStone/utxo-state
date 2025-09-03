@@ -204,4 +204,19 @@ func (r *Router) Broadcast(c *gin.Context) {
 	c.JSON(http.StatusOK, result)
 }
 
+func (r *Router) GetCurrentBlock(c *gin.Context) {
+	height, err := r.rawdb.GetHeight()
+	if err != nil {
+		c.JSON(200, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	c.JSON(200, gin.H{
+		"current_block": height,
+		"status":        "success",
+	})
+}
+
 

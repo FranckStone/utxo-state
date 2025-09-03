@@ -14,6 +14,7 @@
 *.test
 *.out
 go.work
+go.sum
 
 # 依赖管理
 vendor/

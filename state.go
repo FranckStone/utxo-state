@@ -134,6 +134,10 @@ func (s *State) scan() error {
 					fmt.Println("voutDB is nil", vin.Txid, vin.Vout)
 					s.fork(vin.Txid)
 					voutDB, _ = s.DB.GetVout(vin.Txid, vin.Vout)
+					if voutDB == nil {
+						fmt.Println("voutDB is still nil after fork, skipping", vin.Txid, vin.Vout)
+						continue
+					}
 				}
 				vinDB := &Vin{
 					Txid:    vin.Txid,
@@ -171,6 +175,15 @@ func (s *State) updateBalance(address string, value float64) error {
 }
 
 func (s *State) fork(hash string) error {
+	return s.forkWithDepth(hash, 0)
+}
+
+func (s *State) forkWithDepth(hash string, depth int) error {
+	// 防止无限递归，最大递归深度为10
+	if depth > 10 {
+		fmt.Printf("fork recursion depth exceeded for hash: %s\n", hash)
+		return nil
+	}
 
 	txhash, _ := chainhash.NewHashFromStr(hash)
 	transactionVerbose, err := s.Node.GetRawTransactionVerboseBool(txhash)
@@ -219,8 +232,12 @@ func (s *State) fork(hash string) error {
 		voutDB, _ := s.DB.GetVout(vin.Txid, vin.Vout)
 		if voutDB == nil {
 			fmt.Println("voutDB is nil", vin.Txid, vin.Vout)
-			s.fork(vin.Txid)
+			s.forkWithDepth(vin.Txid, depth+1)
 			voutDB, _ = s.DB.GetVout(vin.Txid, vin.Vout)
+			if voutDB == nil {
+				fmt.Println("voutDB is still nil after fork in fork method, skipping", vin.Txid, vin.Vout)
+				continue
+			}
 		}
 		vinDB := &Vin{
 			Txid:    vin.Txid,
